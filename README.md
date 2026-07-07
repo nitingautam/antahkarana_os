@@ -41,6 +41,28 @@ graph TD
 
 ---
 
+## 🧠 Development Methodology: Built with Google DeepMind's Antigravity
+
+This project was architected and developed using **Antigravity** — the advanced agentic AI coding assistant built by the **Google DeepMind** team for Advanced Agentic Coding. Rather than ad-hoc scripting, Antahkarana OS was developed following rigorous **Agentic Engineering Methodologies**:
+
+### 1. Planning Mode & Architectural Design (`implementation_plan.md`)
+Before writing code, we leveraged Antigravity's **Planning Mode** to establish strict architectural boundaries. We designed the data models, relational SQLite table definitions, and PARA routing rules upfront. This ensured our 5 cognitive agents (*Manas*, *Buddhi*, *Chitta*, *Ahamkara*, *Viveka*) could collaborate asynchronously without data collision or state corruption.
+
+### 2. Structured Task Breakdown & Milestone Tracking (`task.md`)
+We managed execution through a living, dynamic checklist (`task.md`), decomposing the multi-agent system into modular, verifiable layers:
+- **Storage Layer**: Relational SQLite (`tasks.db`) and structured markdown archives (`notes.md`, `archive.md`, `digest.md`, `plan.md`).
+- **LLM Client Layer**: Multi-model dynamic endpoint discovery (`v1beta`/`v1`), HTTP 429 rate-limit resilience with automatic backoff, and a deterministic keyword simulation engine for offline reliability.
+- **Agent Orchestration Engine**: Building the 5 Vedic cognitive role classes and wiring them into a cohesive processing pipeline.
+- **Reactive Cyberpunk Web UI**: A glassmorphism single-page web dashboard with real-time Server-Sent Events (SSE) telemetry streaming.
+
+### 3. Verification & End-to-End Walkthroughs (`walkthrough.md`)
+Every feature and edge case was validated against real-world scenarios and documented in an artifact walkthrough (`walkthrough.md`). We verified database initialization from clean slates, Windows console UTF-8 emoji compatibility, rate-limit pacing delays, and JSON cache persistence across frontend UI tab switching.
+
+### 4. Interactive Alignment & Heuristic Refinement
+Through continuous pair-programming alignment loops, we refined our AI classification heuristics—ensuring time-sensitive engineering keywords (`leak`, `release`, `bug`, `fix`, `security`, `critical`) instantly map to **Q1 (Do Now)** in the Eisenhower Matrix, while documentation and research articles automatically route to **Resources & Ideas (Notes)** to maintain task list clarity.
+
+---
+
 ## 🚀 Quickstart & Installation
 
 Antahkarana OS runs 100% locally with lightweight Python dependencies and zero setup friction. It supports **Google Gemini API**, **OpenAI API**, and includes an **Intelligent Simulation Mode** that guarantees a flawless 2-minute demo even offline or without API keys!
