@@ -1,0 +1,36 @@
+# Environment variables & API Keys (NEVER COMMIT KEYS!)
+.env
+.env.local
+.env.development
+.env.production
+*.env
+*.key
+secret*
+!.env.example
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+.venv/
+.env/
+
+# SQLite Databases & runtime data
+*.db
+*.sqlite
+*.sqlite3
+data/tasks.db
+data/temp_*
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.bkp
+.*.bkp
+~*

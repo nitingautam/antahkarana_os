@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antahkarana OS — Second Brain Multi-Agent Productivity System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation Header -->
+        <header class="glass-navbar">
+            <div class="logo-section">
+                <div class="logo-icon">🧘✨</div>
+                <div>
+                    <h1>Antahkarana OS <span class="version-tag">MVP v1.0</span></h1>
+                    <p class="subtitle">Multi-Agent Personal Productivity & Second Brain System</p>
+                </div>
+            </div>
+            
+            <div class="status-pills">
+                <div class="pill" id="pill-inbox"><span class="pill-label">Inbox:</span> <span class="pill-val" id="val-inbox">0</span></div>
+                <div class="pill" id="pill-tasks"><span class="pill-label">Open Tasks:</span> <span class="pill-val" id="val-tasks">0</span></div>
+                <div class="pill alert-pill" id="pill-stale"><span class="pill-label">⚠️ Stale:</span> <span class="pill-val" id="val-stale">0</span></div>
+                <div class="pill ai-pill">🤖 AI Engine Active</div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" onclick="seedDemoData()" title="Reset and seed 10 sample entries">🌱 Seed Demo Data</button>
+                <button class="btn btn-glow" onclick="runFullPipeline()" title="Run all 5 agents in sequence">🚀 Run Full 5-Agent Pipeline</button>
+            </div>
+        </header>
+
+        <!-- Main Workspace Tabs -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-capture', this)">📥 1. Manas <span class="tab-sub">(Capture)</span></button>
+            <button class="tab-btn" onclick="switchTab('tab-para', this)">🧠 2. Buddhi & Chitta <span class="tab-sub">(PARA Storage)</span></button>
+            <button class="tab-btn" onclick="switchTab('tab-review', this)">🪞 3. Ahamkara <span class="tab-sub">(EOD/EOW Review)</span></button>
+            <button class="tab-btn" onclick="switchTab('tab-plan', this)">🎯 4. Viveka <span class="tab-sub">(Eisenhower Plan)</span></button>
+            <button class="tab-btn" onclick="switchTab('tab-console', this)">📡 5. Live Telemetry <span class="tab-sub">(Agent Console)</span></button>
+        </nav>
+
+        <!-- TAB 1: MANAS (CAPTURE & INBOX) -->
+        <main class="tab-pane active" id="tab-capture">
+            <div class="grid-2-col">
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h2>⚡ Daily Unstructured Capture (Manas)</h2>
+                        <p>Capture fleeting ideas, tasks, references, or raw text files. No classification friction at this stage.</p>
+                    </div>
+                    
+                    <div class="capture-form">
+                        <textarea id="capture-input" placeholder="What's on your mind? e.g. 'Fix LLM streaming memory leak by Friday' or 'Explore using Vedic astrology for creative sprints...'"></textarea>
+                        <div class="form-footer">
+                            <select id="capture-source" class="input-select">
+                                <option value="web-ui">Source: Web UI</option>
+                                <option value="voice-memo">Source: Voice Memo</option>
+                                <option value="mobile-clip">Source: Mobile Clip</option>
+                            </select>
+                            <button class="btn btn-primary" onclick="captureText()">Add to Inbox ↵</button>
+                        </div>
+                    </div>
+
+                    <div class="divider"><span>OR INGEST RAW TEXT FILE</span></div>
+
+                    <div class="dropzone" id="file-dropzone" onclick="document.getElementById('file-input').click()">
+                        <div class="drop-icon">📁</div>
+                        <p>Click to upload or drag & drop text file (.txt, .md)</p>
+                        <input type="file" id="file-input" style="display:none" onchange="uploadFile(this.files[0])">
+                    </div>
+                </div>
+
+                <div class="card glass-card">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h2>📬 Raw Capture Inbox <span class="badge" id="inbox-badge-count">0</span></h2>
+                            <p>Unprocessed daily impressions waiting for AI discernment.</p>
+                        </div>
+                        <button class="btn btn-sm btn-accent" onclick="triggerClassifyRoute()">🧠 Process All via AI ↵</button>
+                    </div>
+                    
+                    <div class="inbox-list" id="inbox-list-container">
+                        <div class="empty-state">Inbox is empty. Add notes above or click "Seed Demo Data".</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- TAB 2: BUDDHI & CHITTA (PARA STORAGE) -->
+        <main class="tab-pane" id="tab-para">
+            <div class="pipeline-banner glass-card">
+                <div class="pipeline-step">
+                    <span class="step-num">1</span>
+                    <div><strong>Buddhi (Classifier)</strong><p>LLM tags Type, PARA Category, Priority & Effort</p></div>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="pipeline-step">
+                    <span class="step-num">2</span>
+                    <div><strong>Chitta (Router)</strong><p>Routes to SQLite (tasks) & Markdown (notes/archive)</p></div>
+                </div>
+                <div class="arrow">➔</div>
+                <div>
+                    <button class="btn btn-primary" onclick="triggerClassifyRoute()">⚡ Run Classifier & Router Now</button>
+                </div>
+            </div>
+
+            <div class="para-subnav">
+                <button class="sub-btn active" onclick="switchParaView('view-tasks', this)">📁 Actionable Tasks (tasks.db)</button>
+                <button class="sub-btn" onclick="switchParaView('view-notes', this)">📓 Resources & Ideas (notes.md)</button>
+                <button class="sub-btn" onclick="switchParaView('view-archive', this)">🗄️ Someday / Maybe (archive.md)</button>
+            </div>
+
+            <!-- Tasks View -->
+            <div class="para-view active" id="view-tasks">
+                <div class="filter-bar">
+                    <label>Filter Project/Area:</label>
+                    <select id="filter-category" class="input-select" onchange="loadTasks()">
+                        <option value="">All Categories</option>
+                        <option value="Work/AI Project">Work/AI Project</option>
+                        <option value="Health & Wellness">Health & Wellness</option>
+                        <option value="Finance & Admin">Finance & Admin</option>
+                        <option value="Home & Life">Home & Life</option>
+                    </select>
+                    <label>Status:</label>
+                    <select id="filter-status" class="input-select" onchange="loadTasks()">
+                        <option value="">All Statuses</option>
+                        <option value="open">Open Only</option>
+                        <option value="completed">Completed Only</option>
+                    </select>
+                    <button class="btn btn-sm btn-secondary" onclick="loadTasks()">🔄 Refresh</button>
+                </div>
+                
+                <div class="task-table-wrapper glass-card">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th width="40">Status</th>
+                                <th>Task Description</th>
+                                <th width="140">PARA Category</th>
+                                <th width="100">Priority</th>
+                                <th width="100">Effort</th>
+                                <th width="110">Created</th>
+                                <th width="80">Flags</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-table-body">
+                            <tr><td colspan="7" class="text-center">Loading tasks...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Notes View -->
+            <div class="para-view" id="view-notes">
+                <div class="markdown-viewer glass-card">
+                    <div class="card-header flex-between">
+                        <h3>📓 Reference & Idea Store (data/notes.md)</h3>
+                        <button class="btn btn-sm btn-secondary" onclick="loadNotes()">🔄 Refresh</button>
+                    </div>
+                    <pre class="markdown-content" id="notes-content">Loading notes...</pre>
+                </div>
+            </div>
+
+            <!-- Archive View -->
+            <div class="para-view" id="view-archive">
+                <div class="markdown-viewer glass-card">
+                    <div class="card-header flex-between">
+                        <h3>🗄️ Someday / Maybe Archive (data/archive.md)</h3>
+                        <button class="btn btn-sm btn-secondary" onclick="loadArchive()">🔄 Refresh</button>
+                    </div>
+                    <pre class="markdown-content" id="archive-content">Loading archive...</pre>
+                </div>
+            </div>
+        </main>
+
+        <!-- TAB 3: AHAMKARA (EOD/EOW REVIEW DIGEST) -->
+        <main class="tab-pane" id="tab-review">
+            <div class="card-header flex-between">
+                <div>
+                    <h2>🪞 Ahamkara — EOD/EOW Self-Reflection & Review</h2>
+                    <p>Analyzes completion velocity, detects stale tasks untouched > 3 days, and generates probing AI reflection questions.</p>
+                </div>
+                <button class="btn btn-primary" onclick="triggerReview()">⚡ Generate Review Digest Now</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
+                    <span class="stat-icon">✅</span>
+                    <div class="stat-val" id="stat-completed">0</div>
+                    <div class="stat-label">Completed Tasks</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <span class="stat-icon">⏳</span>
+                    <div class="stat-val" id="stat-open">0</div>
+                    <div class="stat-label">Open Tasks</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <span class="stat-icon">📈</span>
+                    <div class="stat-val" id="stat-rate">0%</div>
+                    <div class="stat-label">Completion Velocity</div>
+                </div>
+                <div class="stat-card alert-stat glass-card">
+                    <span class="stat-icon">⚠️</span>
+                    <div class="stat-val" id="stat-stale">0</div>
+                    <div class="stat-label">Stale Tasks (>3 Days)</div>
+                </div>
+            </div>
+
+            <div class="grid-2-col" style="margin-top: 1.5rem;">
+                <div class="card glass-card alert-border">
+                    <div class="card-header">
+                        <h3>⚠️ Stale Task Audit (>3 Days Untouched)</h3>
+                        <p>These items are stalling your momentum. Decide today: Do, Schedule, Delegate, or Delete!</p>
+                    </div>
+                    <div id="stale-list-container">
+                        <div class="empty-state">No stale items detected. Great momentum!</div>
+                    </div>
+                </div>
+
+                <div class="card glass-card wisdom-border">
+                    <div class="card-header">
+                        <h3>🧘 AI Self-Reflection Guidance</h3>
+                        <p>Personalized questions generated by Ahamkara to break bottlenecks and align focus.</p>
+                    </div>
+                    <div id="reflection-list-container">
+                        <div class="empty-state">Click "Generate Review Digest Now" to receive AI reflection guidance.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card glass-card" style="margin-top: 1.5rem;">
+                <h3>📄 Full Review Digest Document (data/digest.md)</h3>
+                <pre class="markdown-content" id="digest-raw-content">No digest generated yet.</pre>
+            </div>
+        </main>
+
+        <!-- TAB 4: VIVEKA (EISENHOWER PLANNER) -->
+        <main class="tab-pane" id="tab-plan">
+            <div class="card-header flex-between">
+                <div>
+                    <h2>🎯 Viveka — Executive Eisenhower Action Plan</h2>
+                    <p>Ranks all open tasks into the 4-Quadrant Eisenhower Matrix based on urgency and strategic importance.</p>
+                </div>
+                <button class="btn btn-primary" onclick="triggerPlan()">⚡ Generate Action Plan Now</button>
+            </div>
+
+            <div class="plan-summary-box glass-card" id="plan-summary-box">
+                <strong>Executive Rationale:</strong> Click "Generate Action Plan Now" to synthesize priorities.
+            </div>
+
+            <div class="eisenhower-grid">
+                <div class="quadrant q1-card glass-card">
+                    <div class="q-header">
+                        <h3>🔥 Q1 — Do Now</h3>
+                        <span class="q-tag">Urgent & Important</span>
+                    </div>
+                    <p class="q-desc">Crises, deadlines, critical bugs, immediate financial impact.</p>
+                    <div class="q-list" id="q1-list"><div class="empty-state">No items</div></div>
+                </div>
+
+                <div class="quadrant q2-card glass-card">
+                    <div class="q-header">
+                        <h3>📅 Q2 — Schedule & Focus</h3>
+                        <span class="q-tag">Important, Not Urgent</span>
+                    </div>
+                    <p class="q-desc">AI project architecture, deep work, health routines, strategic planning.</p>
+                    <div class="q-list" id="q2-list"><div class="empty-state">No items</div></div>
+                </div>
+
+                <div class="quadrant q3-card glass-card">
+                    <div class="q-header">
+                        <h3>⚡ Q3 — Delegate / Quick Win</h3>
+                        <span class="q-tag">Urgent, Not Important</span>
+                    </div>
+                    <p class="q-desc">Quick administrative chores, batchable emails, minor fixes.</p>
+                    <div class="q-list" id="q3-list"><div class="empty-state">No items</div></div>
+                </div>
+
+                <div class="quadrant q4-card glass-card">
+                    <div class="q-header">
+                        <h3>🗑️ Q4 — Reconsider / Eliminate</h3>
+                        <span class="q-tag">Neither</span>
+                    </div>
+                    <p class="q-desc">Low ROI tasks, distractions, aspirations without current timeline.</p>
+                    <div class="q-list" id="q4-list"><div class="empty-state">No items</div></div>
+                </div>
+            </div>
+
+            <div class="card glass-card" style="margin-top: 1.5rem;">
+                <h3>📄 Full Action Plan Document (data/plan.md)</h3>
+                <pre class="markdown-content" id="plan-raw-content">No plan generated yet.</pre>
+            </div>
+        </main>
+
+        <!-- TAB 5: SUTRADHARA (LIVE AGENT TELEMETRY CONSOLE) -->
+        <main class="tab-pane" id="tab-console">
+            <div class="card glass-card terminal-card">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">Sutradhara — Live AI Agent Telemetry & Reasoning Log</span>
+                    <button class="btn btn-sm btn-secondary" onclick="clearConsole()">🗑️ Clear Log</button>
+                </div>
+                <div class="terminal-body" id="console-output">
+                    <div class="log-line sys">[SYSTEM] Antahkarana OS Telemetry Console Initialized. Ready for agent execution.</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">Notification message</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
