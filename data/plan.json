@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-07-06 22:54:15",
+  "q1_do_now": [
+    {
+      "task": {
+        "id": "tsk-0101",
+        "text": "Fix memory leak in LLM streaming endpoint before Friday release",
+        "item_type": "task",
+        "category": "Work/AI Project",
+        "priority": "high",
+        "effort": "focused",
+        "status": "open",
+        "created_at": "2026-07-01T22:53:06.261250",
+        "updated_at": "2026-07-06T22:54:11.447548",
+        "stale": true
+      },
+      "quadrant": "Q1 - DO NOW (URGENT & IMPORTANT)",
+      "reason": "Time-sensitive item with immediate impact on operations or deadlines."
+    },
+    {
+      "task": {
+        "id": "wto-0401",
+        "text": "Awaiting security review approval from DevOps team for AWS IAM role changes",
+        "item_type": "waiting-on",
+        "category": "Work/AI Project",
+        "priority": "high",
+        "effort": "focused",
+        "status": "open",
+        "created_at": "2026-06-30T22:53:06.261250",
+        "updated_at": "2026-07-06T22:54:14.315193",
+        "stale": true
+      },
+      "quadrant": "Q1 - DO NOW (URGENT & IMPORTANT)",
+      "reason": "Time-sensitive item with immediate impact on operations or deadlines."
+    }
+  ],
+  "q2_schedule": [
+    {
+      "task": {
+        "id": "tsk-0104",
+        "text": "Refactor PARA storage SQLite queries for better concurrency",
+        "item_type": "task",
+        "category": "General",
+        "priority": "med",
+        "effort": "project",
+        "status": "open",
+        "created_at": "2026-07-06T22:53:06.261250",
+        "updated_at": "2026-07-06T22:54:12.525804",
+        "stale": false
+      },
+      "quadrant": "Q2 - SCHEDULE (IMPORTANT, NOT URGENT)",
+      "reason": "High value project work requiring scheduled focus blocks."
+    }
+  ],
+  "q3_delegate": [
+    {
+      "task": {
+        "id": "tsk-0102",
+        "text": "Schedule annual dentist cleaning and checkup",
+        "item_type": "task",
+        "category": "Health & Wellness",
+        "priority": "med",
+        "effort": "quick",
+        "status": "open",
+        "created_at": "2026-07-02T22:53:06.261250",
+        "updated_at": "2026-07-06T22:54:11.807877",
+        "stale": true
+      },
+      "quadrant": "Q3 - DELEGATE / QUICK WIN (URGENT, NOT IMPORTANT)",
+      "reason": "Low cognitive load item that can be batched or delegated."
+    }
+  ],
+  "q4_eliminate": [],
+  "summary": "This execution plan balances high-priority AI project deliverables with critical health and financial maintenance. Urgent bug fixes and time-sensitive admin tasks are front-loaded into Q1 (Do Now), while deep architectural work is protected in Q2 (Schedule)."
+}

@@ -124,8 +124,10 @@ def main():
     cap_parser.add_argument("text", nargs="?", help="Text string to capture")
     cap_parser.add_argument("-f", "--file", help="Path to text file to capture")
     
-    # Seed command
+    # Seed & Clean commands
     subparsers.add_parser("seed", help="Reset storage and seed sample data")
+    subparsers.add_parser("clean", help="Wipe all data and reset storage to completely empty slate")
+    subparsers.add_parser("reset", help="Alias for clean (wipe all data)")
     
     # Pipeline commands
     subparsers.add_parser("classify", help="Run Classifier Agent on inbox items")
@@ -156,6 +158,10 @@ def main():
     elif args.command == "seed":
         seed_sample_data(storage)
         
+    elif args.command in ["clean", "reset"]:
+        storage.reset_all_data()
+        print(f"{GREEN}{BOLD}✅ Wiped all data from database (tasks.db) and archives! System reset to empty slate.{RESET}")
+        
     elif args.command == "classify" or args.command == "route":
         print("Running processing pipeline...")
         inbox = storage.get_inbox_items()
@@ -163,6 +169,8 @@ def main():
             c = pipeline.classifier_agent.classify(item)
             r = pipeline.router_agent.route(c)
             print(f"Routed `[{item.id}]` -> {r['destination']}")
+            if llm.gemini_key or llm.openai_key:
+                time.sleep(1.0)
             
     elif args.command == "review":
         digest = pipeline.reviewer_agent.review()

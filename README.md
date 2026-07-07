@@ -117,4 +117,21 @@ python cli.py plan
 
 # Reset and seed sample demo data
 python cli.py seed
+
+# Wipe all tasks.db and archive data for a completely clean slate
+python cli.py clean
 ```
+
+---
+
+## 🧹 Cleaning & Resetting Storage (Database Maintenance)
+
+If you need to clear old data from SQLite (`tasks.db`) and markdown archives to start with a completely clean slate, choose any of these three methods:
+
+1. **CLI Command (Recommended)**:
+   ```bash
+   python cli.py clean   # Or: python cli.py reset
+   ```
+2. **API Endpoint**: Send a `POST` request to `http://localhost:8000/api/trigger/clean`.
+3. **Manual Deletion**: Delete the `./data/tasks.db` file or `./data/` directory. Antahkarana OS will automatically generate fresh, empty storage files on next run!
+

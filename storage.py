@@ -25,7 +25,9 @@ class StorageManager:
         self.notes_file = os.path.join(self.data_dir, "notes.md")
         self.archive_file = os.path.join(self.data_dir, "archive.md")
         self.digest_file = os.path.join(self.data_dir, "digest.md")
+        self.digest_json = os.path.join(self.data_dir, "digest.json")
         self.plan_file = os.path.join(self.data_dir, "plan.md")
+        self.plan_json = os.path.join(self.data_dir, "plan.json")
         self.init_storage()
 
     def init_storage(self):
@@ -243,6 +245,8 @@ class StorageManager:
             
         with open(self.digest_file, "w", encoding="utf-8") as f:
             f.write(content)
+        with open(self.digest_json, "w", encoding="utf-8") as f:
+            f.write(digest.model_dump_json(indent=2))
 
     def save_plan(self, plan: PlanDigest):
         content = f"# 🎯 Antahkarana OS - Eisenhower Action Plan\n"
@@ -287,6 +291,8 @@ class StorageManager:
 
         with open(self.plan_file, "w", encoding="utf-8") as f:
             f.write(content)
+        with open(self.plan_json, "w", encoding="utf-8") as f:
+            f.write(plan.model_dump_json(indent=2))
 
     def get_digest_content(self) -> str:
         if not os.path.exists(self.digest_file):
@@ -307,6 +313,10 @@ class StorageManager:
         self.clear_archive()
         if os.path.exists(self.digest_file):
             os.remove(self.digest_file)
+        if os.path.exists(self.digest_json):
+            os.remove(self.digest_json)
         if os.path.exists(self.plan_file):
             os.remove(self.plan_file)
+        if os.path.exists(self.plan_json):
+            os.remove(self.plan_json)
         self.init_storage()

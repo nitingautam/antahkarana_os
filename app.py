@@ -110,21 +110,40 @@ def get_archive():
 @app.get("/api/digest")
 def get_digest():
     content = storage.get_digest_content()
-    # Try to return parsed info if possible
     tasks = storage.get_tasks()
     stale = [t.model_dump() for t in tasks if t.stale or (t.status != "completed" and "tsk-010" in t.id and int(t.id[-1]) <= 2)]
-    return {"content": content, "stale_items": stale}
+    res = {"content": content, "stale_items": stale}
+    if os.path.exists(storage.digest_json):
+        try:
+            with open(storage.digest_json, "r", encoding="utf-8") as f:
+                d_data = json.load(f)
+                res["digest"] = d_data
+                if "reflections" in d_data:
+                    res["reflections"] = d_data["reflections"]
+        except Exception:
+            pass
+    return res
 
 @app.get("/api/plan")
 def get_plan():
     content = storage.get_plan_content()
-    return {"content": content}
+    res = {"content": content}
+    if os.path.exists(storage.plan_json):
+        try:
+            with open(storage.plan_json, "r", encoding="utf-8") as f:
+                res["plan"] = json.load(f)
+        except Exception:
+            pass
+    return res
 
 @app.post("/api/trigger/{action}")
 def trigger_agent_action(action: str):
     if action == "seed":
         seed_sample_data(storage)
         return {"status": "success", "message": "Seeded 10 sample entries."}
+    elif action in ["clean", "reset"]:
+        storage.reset_all_data()
+        return {"status": "success", "message": "Wiped all data from database and archives. Clean slate!"}
     elif action == "classify-route":
         inbox = storage.get_inbox_items()
         results = []
@@ -132,6 +151,8 @@ def trigger_agent_action(action: str):
             c = pipeline.classifier_agent.classify(item)
             r = pipeline.router_agent.route(c)
             results.append(r)
+            if llm.gemini_key or llm.openai_key:
+                time.sleep(1.0)
         return {"status": "success", "processed": len(results), "results": results}
     elif action == "review":
         digest = pipeline.reviewer_agent.review()

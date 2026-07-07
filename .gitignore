@@ -34,3 +34,7 @@ Thumbs.db
 *.bkp
 .*.bkp
 ~*
+
+# Demo and presentation scripts (local only)
+CAPSTONE*.md
+*SCRIPT*.md

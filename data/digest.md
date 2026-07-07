@@ -1,5 +1,5 @@
 # 📊 Antahkarana OS - Review Digest
-**Generated**: 2026-07-06 15:53:00
+**Generated**: 2026-07-06 22:54:15
 
 ## 📈 Execution Metrics
 - **Completed Tasks**: 0
@@ -8,8 +8,8 @@
 
 ## ⚠️ Stale Tasks (>3 Days Untouched)
 - `[tsk-0102]` **Schedule annual dentist cleaning and checkup** *(Category: Health & Wellness, Priority: med, Created: 2026-07-02)*
-- `[tsk-0101]` **Fix memory leak in LLM streaming endpoint before Friday release** *(Category: Work/AI Project, Priority: med, Created: 2026-07-01)*
-- `[wto-0401]` **Awaiting security review approval from DevOps team for AWS IAM role changes** *(Category: Work/AI Project, Priority: med, Created: 2026-06-30)*
+- `[tsk-0101]` **Fix memory leak in LLM streaming endpoint before Friday release** *(Category: Work/AI Project, Priority: high, Created: 2026-07-01)*
+- `[wto-0401]` **Awaiting security review approval from DevOps team for AWS IAM role changes** *(Category: Work/AI Project, Priority: high, Created: 2026-06-30)*
 
 ## 🪞 Self-Reflection & Guidance
 ### Question 1

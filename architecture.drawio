@@ -1,23 +1,20 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6" pages="2">
   <diagram id="antahkarana-arch" name="Antahkarana OS Architecture">
-    <mxGraphModel dx="2778" dy="989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#0A0E17" math="0" shadow="0">
+    <mxGraphModel dx="2396" dy="765" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#0A0E17" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="qKIEYmAijlH-G3ZelBZ_-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="880" width="1000" x="-50" y="10" as="geometry" />
         </mxCell>
-        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#00F2FE;" value="ANTKHARANA OS — MULTI-AGENT SECOND BRAIN ARCHITECTURE" vertex="1">
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#00F2FE;" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;ANTKHARANA OS — MULTI-AGENT SECOND BRAIN ARCHITECTURE&lt;/font&gt;" vertex="1">
           <mxGeometry height="40" width="890" x="10" y="20" as="geometry" />
         </mxCell>
         <mxCell id="layer1" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fillColor=#121928;strokeColor=#00F2FE;fontColor=#00F2FE;rounded=1;" value="LAYER 1: DAILY UNSTRUCTURED CAPTURE (MANAS)" vertex="1">
-          <mxGeometry height="155" width="370" x="-30" y="80" as="geometry" />
+          <mxGeometry height="90" width="370" x="-30" y="80" as="geometry" />
         </mxCell>
         <mxCell id="input_cli" parent="layer1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E2438;strokeColor=#00F2FE;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" value="💻 CLI Command / File Upload&#xa;(Raw Text, Voice Notes, Markdown)" vertex="1">
           <mxGeometry height="60" width="370" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="agent_manas" parent="layer1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0072FF;strokeColor=#00F2FE;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" value="📥 Manas (Capture Agent)&#xa;Appends raw {id, text, timestamp} entries" vertex="1">
-          <mxGeometry height="65" width="370" y="90" as="geometry" />
         </mxCell>
         <mxCell id="inbox_store" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#FFB300;strokeColor=#FFB300;fontColor=#000000;fontSize=13;fontStyle=1;size=15;" value="📭 inbox.jsonl&#xa;(Append-only daily capture buffer)" vertex="1">
           <mxGeometry height="80" width="200" x="400" y="135" as="geometry" />
@@ -28,26 +25,26 @@
         <mxCell id="agent_chitta" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00C6FF;strokeColor=#00F2FE;fontColor=#000000;fontSize=13;fontStyle=1;" value="🗄️ Chitta (Router Agent)&#xa;Atomic PARA routing into SQLite &amp; Markdown stores" vertex="1">
           <mxGeometry height="70" width="260" x="370" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="store_tasks" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#00E676;strokeColor=#00E676;fontColor=#000000;fontSize=12;fontStyle=1;" value="📁 tasks.db (SQLite)&#xa;Actionable Tasks &amp; Stale Tracking" vertex="1">
+        <mxCell id="store_tasks" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#00E676;strokeColor=#00E676;fontColor=#000000;fontSize=12;fontStyle=1;" value="📁 tasks.db (SQLite)&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;Actionable Tasks &amp;amp; Stale Tracking&lt;/span&gt;" vertex="1">
           <mxGeometry height="80" width="200" x="120" y="520" as="geometry" />
         </mxCell>
-        <mxCell id="store_notes" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#FFB300;strokeColor=#FFB300;fontColor=#000000;fontSize=12;fontStyle=1;" value="📓 notes.md (Markdown)&#xa;PARA Resources &amp; Ideas" vertex="1">
-          <mxGeometry height="80" width="200" x="400" y="520" as="geometry" />
+        <mxCell id="store_notes" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#FFB300;strokeColor=#FFB300;fontColor=#000000;fontSize=12;fontStyle=1;" value="📓 notes.md (Markdown)&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;PARA Resources &amp;amp; Ideas&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="400" y="491" as="geometry" />
         </mxCell>
-        <mxCell id="store_archive" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#94A3B8;strokeColor=#FFFFFF;fontColor=#000000;fontSize=12;fontStyle=1;" value="🗄️ archive.md (Markdown)&#xa;PARA Archive / Someday Maybe" vertex="1">
+        <mxCell id="store_archive" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#94A3B8;strokeColor=#FFFFFF;fontColor=#000000;fontSize=12;fontStyle=1;" value="🗄️ archive.md (Markdown)&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;PARA Archive / Someday Maybe&lt;/span&gt;" vertex="1">
           <mxGeometry height="80" width="200" x="680" y="520" as="geometry" />
         </mxCell>
         <mxCell id="agent_ahamkara" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF3366;strokeColor=#FF3366;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" value="🪞 Ahamkara (Reviewer Agent)&#xa;EOD/EOW Review: Velocity stats, Stale Item Audit (&gt;3d), 3 AI Reflections" vertex="1">
-          <mxGeometry height="80" width="340" x="120" y="660" as="geometry" />
+          <mxGeometry height="80" width="340" x="50" y="670" as="geometry" />
         </mxCell>
-        <mxCell id="agent_viveka" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB300;strokeColor=#FFB300;fontColor=#000000;fontSize=13;fontStyle=1;" value="🎯 Viveka (Planner Agent)&#xa;Executive Direction: Eisenhower 4-Quadrant Matrix Allocation" vertex="1">
-          <mxGeometry height="80" width="340" x="540" y="660" as="geometry" />
+        <mxCell id="agent_viveka" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB300;strokeColor=#FFB300;fontColor=#000000;fontSize=13;fontStyle=1;" value="🎯 Viveka (Planner Agent)&lt;br&gt;Executive Direction:&amp;nbsp;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;Eisenhower 4-Quadrant Matrix Allocation&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="340" x="550" y="670" as="geometry" />
         </mxCell>
         <mxCell id="out_digest" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#FF3366;strokeColor=#FF3366;fontColor=#FFFFFF;fontSize=12;fontStyle=1;" value="📊 digest.md&#xa;Execution Metrics &amp; AI Reflections" vertex="1">
-          <mxGeometry height="70" width="180" x="200" y="770" as="geometry" />
+          <mxGeometry height="70" width="180" x="130" y="790" as="geometry" />
         </mxCell>
         <mxCell id="out_plan" parent="1" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#00F2FE;strokeColor=#00F2FE;fontColor=#000000;fontSize=12;fontStyle=1;" value="🎯 plan.md&#xa;Q1 Do Now / Q2 Schedule / Q3 Delegate" vertex="1">
-          <mxGeometry height="70" width="180" x="620" y="770" as="geometry" />
+          <mxGeometry height="70" width="180" x="630" y="780" as="geometry" />
         </mxCell>
         <mxCell id="arr1" edge="1" parent="1" source="agent_manas" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#00F2FE;strokeWidth=2;" target="inbox_store">
           <mxGeometry relative="1" as="geometry" />
@@ -71,7 +68,12 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="arr8" edge="1" parent="1" source="store_tasks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FFB300;strokeWidth=2;" target="agent_viveka">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="620" />
+              <mxPoint x="710" y="620" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="arr9" edge="1" parent="1" source="agent_ahamkara" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FF3366;strokeWidth=2;" target="out_digest">
           <mxGeometry relative="1" as="geometry" />
@@ -84,6 +86,15 @@
         </mxCell>
         <mxCell id="mLVOFn_Hw9eSrRbG6toE-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;JSR&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="120" width="130" x="780" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="agent_manas" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0072FF;strokeColor=#00F2FE;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" value="📥 Manas (Capture Agent)&#xa;Appends raw {id, text, timestamp} entries" vertex="1">
+          <mxGeometry height="65" width="370" x="-30" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="6JbVNoW5ESltE9ptHGrG-1" edge="1" parent="1" source="input_cli" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="agent_manas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6JbVNoW5ESltE9ptHGrG-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="JSR" vertex="1">
+          <mxGeometry height="30" width="60" x="-10" y="410" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

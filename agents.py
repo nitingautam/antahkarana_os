@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from datetime import datetime
 from typing import List, Optional, Dict, Any
 from models import (
@@ -403,11 +404,17 @@ class AntahkaranaPipeline:
             classified = self.classifier_agent.classify(item)
             res = self.router_agent.route(classified)
             routed_results.append(res)
+            if self.llm.gemini_key or self.llm.openai_key:
+                time.sleep(1.0)  # Spacing out requests to prevent free tier rate limits (HTTP 429)
             
         # 2. Review (Ahamkara)
+        if self.llm.gemini_key or self.llm.openai_key:
+            time.sleep(1.0)
         digest = self.reviewer_agent.review()
         
         # 3. Plan (Viveka)
+        if self.llm.gemini_key or self.llm.openai_key:
+            time.sleep(1.0)
         plan = self.planner_agent.plan(digest)
         
         summary = {

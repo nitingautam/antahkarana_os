@@ -257,6 +257,16 @@ async function loadDigest() {
         } else {
             staleContainer.innerHTML = `<div class="empty-state">No stale items detected! Great momentum across all projects.</div>`;
         }
+
+        const refContainer = document.getElementById("reflection-list-container");
+        if (data.reflections && data.reflections.length > 0) {
+            refContainer.innerHTML = data.reflections.map((ref, i) => `
+                <div class="wisdom-card">
+                    <div style="font-weight:700;color:#ffb300;margin-bottom:4px;">✨ Reflection Question ${i+1}:</div>
+                    "${escapeHtml(ref)}"
+                </div>
+            `).join("");
+        }
         
         refreshAll();
     } catch (err) {
@@ -270,6 +280,14 @@ async function loadPlan() {
         const res = await fetch("/api/plan");
         const data = await res.json();
         document.getElementById("plan-raw-content").textContent = data.content || "No plan generated yet.";
+        if (data.plan) {
+            const p = data.plan;
+            document.getElementById("plan-summary-box").innerHTML = `<strong>Executive Rationale:</strong> ${escapeHtml(p.summary)}`;
+            renderQuadrant("q1-list", p.q1_do_now);
+            renderQuadrant("q2-list", p.q2_schedule);
+            renderQuadrant("q3-list", p.q3_delegate);
+            renderQuadrant("q4-list", p.q4_eliminate);
+        }
     } catch (err) {
         console.error("Plan load failed:", err);
     }
@@ -381,8 +399,8 @@ async function runFullPipeline() {
             refreshAll();
             loadInbox();
             loadTasks();
-            triggerReview();
-            triggerPlan();
+            loadDigest();
+            loadPlan();
         }
     } catch (err) {
         showToast("❌ Pipeline execution failed.");

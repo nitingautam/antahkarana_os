@@ -95,6 +95,25 @@ class LLMClient:
                         # Model not found on this endpoint/tier, try next model in loop
                         last_error = res.text
                         continue
+                    elif res.status_code == 429:
+                        # Rate limit hit! Wait 2s and retry once
+                        self.log_event(agent_name, "warning", f"Rate limit (HTTP 429) hit on {model_name}. Waiting 2s before retry...", {})
+                        time.sleep(2.0)
+                        res2 = requests.post(url, headers=headers, json=body, timeout=15)
+                        if res2.status_code == 200:
+                            data = res2.json()
+                            output_text = data["contents"][0]["parts"][0]["text"].strip()
+                            if json_mode and output_text.startswith("```json"):
+                                output_text = output_text[7:]
+                            if json_mode and output_text.endswith("```"):
+                                output_text = output_text[:-3]
+                            output_text = output_text.strip()
+                            self._working_gemini_model = model_name
+                            self.log_event(agent_name, "success", f"Gemini ({model_name}) response generated after retry ({len(output_text)} chars).", {"response": output_text[:300] + "..."})
+                            return output_text
+                        else:
+                            last_error = f"HTTP {res2.status_code} on retry: {res2.text}"
+                            break
                     else:
                         last_error = f"HTTP {res.status_code}: {res.text}"
                         break
@@ -185,7 +204,7 @@ class LLMClient:
                 category = "Home & Life"
 
             # Keywords for priority
-            if any(w in lower_prompt for w in ["urgent", "asap", "immediately", "critical", "today", "high", "bug", "tax", "deadline"]):
+            if any(w in lower_prompt for w in ["urgent", "asap", "immediately", "critical", "today", "high", "bug", "tax", "deadline", "leak", "release", "fix", "error", "security"]):
                 priority = "high"
             elif any(w in lower_prompt for w in ["someday", "low", "when possible", "minor", "maybe"]):
                 priority = "low"
@@ -240,7 +259,7 @@ class LLMClient:
                         # Assign quadrant based on priority and effort keywords in line
                         quadrant = "Q2 - Schedule (Important, Not Urgent)"
                         reason = "High value project work requiring scheduled focus blocks."
-                        if "high" in line.lower() or "urgent" in line.lower() or "bug" in line.lower() or "tax" in line.lower():
+                        if any(k in line.lower() for k in ["high", "urgent", "bug", "tax", "leak", "release", "fix", "error", "security", "critical"]):
                             quadrant = "Q1 - Do Now (Urgent & Important)"
                             reason = "Time-sensitive item with immediate impact on operations or deadlines."
                         elif "quick" in line.lower() and ("low" in line.lower() or "med" in line.lower()):
